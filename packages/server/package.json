@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.3.2",
+    "apollo-server-express": "^2.3.2",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "firebase": "^5.8.1",
+    "firebase-admin": "^6.5.1",
+    "firebase-app": "^0.0.1",
+    "graphql": "^14.1.1",
+    "graphql-tools": "^4.0.4",
+    "nodemon": "^1.18.9"
+  },
+  "devDependencies": {}
+}
