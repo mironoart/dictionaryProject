@@ -2,12 +2,19 @@ import { makeExecutableSchema } from "graphql-tools";
 import resolvers from "../resolvers";
 
 const typeDefs = `
+
+type Obj {
+  id: String
+  translationId: String
+  word: String
+}
   type Query {
-    name: String
+    getRuWords(word: String!): String
   }
 
+
   type Mutation {
-    name: String
+    addWord(word: String!): String
   }
 `;
 

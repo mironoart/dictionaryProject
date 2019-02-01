@@ -2,7 +2,7 @@ var admin = require("firebase-admin");
 var serviceAccount = require("./serviceKey.json");
 
 import schema from "./graphql/schema";
-import { ApolloServer } from "apollo-server";
+import { GraphQLServer } from "graphql-yoga";
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -10,8 +10,5 @@ admin.initializeApp({
 });
 admin.firestore().settings({ timestampsInSnapshots: true }); // Supposedly doing something with storing a !date!
 
-const server = new ApolloServer({ schema });
-
-server.listen().then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
-});
+const server = new GraphQLServer({ schema });
+server.start(() => console.log("Server is running on localhost:4000"));

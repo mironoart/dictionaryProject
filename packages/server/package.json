@@ -10,18 +10,24 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "algoliasearch": "^3.32.0",
     "apollo-server": "^2.3.2",
     "apollo-server-express": "^2.3.2",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "body-parser": "^1.18.3",
+    "eslint-plugin-babel": "^5.3.0",
     "express": "^4.16.4",
     "firebase": "^5.8.1",
     "firebase-admin": "^6.5.1",
     "firebase-app": "^0.0.1",
+    "firebase-functions": "^2.1.0",
     "graphql": "^14.1.1",
     "graphql-tools": "^4.0.4",
-    "nodemon": "^1.18.9"
+    "graphql-yoga": "^1.17.1",
+    "nodemon": "^1.18.9",
+    "uuid": "^3.3.2"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "private": true
 }
