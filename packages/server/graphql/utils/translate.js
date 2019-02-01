@@ -1,7 +1,7 @@
 const { Translate } = require("@google-cloud/translate");
 
-const projectId = "heroic-command-225220";
-const key = "AIzaSyBRBGpAUYIVnI6nm0pbigGXtTk8WFvQLzk";
+const projectId = process.env.PROJECT_ID;
+const key = process.env.TRANSLATION_API_KEY;
 const translate = new Translate({
   projectId: projectId,
   key: key

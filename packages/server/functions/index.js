@@ -1,18 +1,19 @@
-const admin = require("firebase-admin");
-const functions = require("firebase-functions");
-const algoliasearch = require("algoliasearch");
-const uuid = require("uuid/v4");
+import { initializeApp } from "firebase-admin";
+import { firestore } from "firebase-functions";
+import algoliasearch from "algoliasearch";
+import uuid from "uuid/v4";
 
-const client = algoliasearch("6QTW9QZLGC", "eae63e7a6ede2ed3e059047b8cf6f5e6");
+const client = algoliasearch(
+  process.env.ALGOLIASEARCH_APPLICATION_ID,
+  process.env.ALGOLIASEARCH_API_KEY
+);
 const index = client.initIndex("MyNameTranslate");
 
-admin.initializeApp();
+initializeApp();
 
-exports.addIndex = functions.firestore
-  .document("English")
-  .onCreate((snap, context) => {
-    const word = snap.data();
-    word.objectID = uuid();
+export const addIndex = firestore.document("English").onCreate(snap => {
+  const word = snap.data();
+  word.objectID = uuid();
 
-    return index.saveObject(word);
-  });
+  return index.saveObject(word);
+});

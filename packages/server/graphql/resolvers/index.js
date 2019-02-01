@@ -2,8 +2,10 @@ var admin = require("firebase-admin");
 import { v4 as uuid } from "uuid";
 import translate from "../utils/translate";
 var algoliasearch = require("algoliasearch");
-
-const client = algoliasearch("6QTW9QZLGC", "eae63e7a6ede2ed3e059047b8cf6f5e6");
+const client = algoliasearch(
+  process.env.ALGOLIASEARCH_APPLICATION_ID,
+  process.env.ALGOLIASEARCH_API_KEY
+);
 const index = client.initIndex("MyNameTranslate");
 
 const resolvers = {

@@ -1,5 +1,6 @@
 var admin = require("firebase-admin");
 var serviceAccount = require("./serviceKey.json");
+import "dotenv/config"; // same as require('dotenv').config()
 
 import schema from "./graphql/schema";
 import { GraphQLServer } from "graphql-yoga";
