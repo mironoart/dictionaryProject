@@ -1,26 +1,49 @@
-import { makeExecutableSchema } from "graphql-tools";
-import resolvers from "../resolvers";
+import { makeExecutableSchema } from 'graphql-tools'
+import resolvers from '../resolvers'
 
 const typeDefs = `
 
-type Obj {
-  id: String
-  translationId: String
-  word: String
+type WordInfo {
+  microsoftFrequency: String
+  partOfSpeech: String
+  translatedWord: String
+  userFrequency: String
+  confidence: String
 }
-  type Query {
-    getRuWords(word: String!): String
-  }
+
+type Words {
+  id: String
+  word: String
+  translationsId: String
+  partOfSpeech: String
+  microsoftFrequency: String
+}
+
+type Query {
+
+  getWords(
+    language: String! 
+    word: String!): [WordInfo]
+
+  getMicrosoft(
+    from: String! 
+    to: String! 
+    word: String!): [WordInfo]
+}
 
 
-  type Mutation {
-    addWord(word: String!): String
-  }
-`;
+type Mutation {
+  addWord(
+    language: String! 
+    word:String! 
+    translatedWord: String! 
+    partOfSpeech: String!) : String
+}
+`
 
 const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers
-});
+	typeDefs,
+	resolvers
+})
 
-export default schema;
+export default schema
