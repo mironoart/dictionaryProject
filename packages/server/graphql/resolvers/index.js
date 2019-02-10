@@ -4,7 +4,8 @@ import mutationResolvers from './mutationResolvers'
 export default {
 	Query: {
 		getWords: queryResolvers.getWords,
-		getMicrosoft: queryResolvers.getMicrosoft
+		getMicrosoft: queryResolvers.getMicrosoft,
+		getExamples: queryResolvers.getExamples
 	},
 	Mutation: {
 		addWord: mutationResolvers.addWord

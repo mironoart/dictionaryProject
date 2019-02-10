@@ -1,6 +1,6 @@
 var admin = require('firebase-admin')
 import getArrOfTranslations from '../utils/getArrOfTranslations'
-
+import getArrOfExamples from '../utils/getArrOfExamples'
 const db = (language, word) => {
 	return admin
 		.firestore()
@@ -35,6 +35,12 @@ export default {
 
 	getMicrosoft: async (_, { from, to, word }) => {
 		const arr = await getArrOfTranslations(from, to, word, 'lookup')
+		console.log(arr[0])
+		return arr
+	},
+
+	getExamples: async (_, { from, to, word, translation }) => {
+		const arr = await getArrOfExamples(from, to, word, 'examples', translation)
 		console.log(arr[0])
 		return arr
 	}

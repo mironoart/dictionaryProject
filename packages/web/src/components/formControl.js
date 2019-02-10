@@ -36,6 +36,15 @@ class NativeSelects extends React.Component {
 
 	handleChange = name => event => {
 		this.setState({ [name]: event.target.value })
+		if (event.target.value === 'English') {
+			this.props.lang('en')
+		}
+		if (event.target.value === 'Russian') {
+			this.props.lang('ru')
+		}
+		if (!event.target.value) {
+			this.props.lang('')
+		}
 	}
 
 	render() {

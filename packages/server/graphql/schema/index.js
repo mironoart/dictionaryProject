@@ -19,6 +19,11 @@ type Words {
   microsoftFrequency: String
 }
 
+type Examples {
+  fromSentence: String
+  toSentence: String
+}
+
 type Query {
 
   getWords(
@@ -29,6 +34,8 @@ type Query {
     from: String! 
     to: String! 
     word: String!): [WordInfo]
+
+  getExamples(from: String! to: String! word: String! translation: String!): [Examples]
 }
 
 
