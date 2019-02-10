@@ -11,7 +11,6 @@ import {
 	Divider,
 	IconButton,
 	ListItem,
-	ListItemIcon,
 	ListItemText
 } from '@material-ui/core'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
@@ -147,8 +146,8 @@ class MiniDrawer extends React.Component {
 					<List>
 						{icons('blue').map((item, index) => {
 							return (
-								<ListItem button key={index}>
-									<ListItemIcon> {item.body}</ListItemIcon>
+								<ListItem key={index.toString()} button>
+									{item.body}
 									<ListItemText primary={item.name} />
 								</ListItem>
 							)

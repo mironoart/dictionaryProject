@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import Loading from './Loading'
-/* 
+
 export default class Examples extends Component {
 	render() {
 		const GET_EXAMPLES = gql`
@@ -25,13 +25,25 @@ export default class Examples extends Component {
 			return (
 				<Query query={GET_EXAMPLES} variables={variables}>
 					{({ data, loading, error }) => {
-						if (loading) return <Loading />
+						if (loading)
+							return (
+								<div
+									style={{
+										display: 'flex',
+										justifyContent: 'center',
+										alignItems: 'center',
+										height: '303px'
+									}}
+								>
+									<Loading />
+								</div>
+							)
 						if (error) return <p>ERROR</p>
 						if (!data) return 'Examples hadn'
 
-						const items = data.getExamples.map(items => {
+						const items = data.getExamples.map((items, i) => {
 							return (
-								<p>
+								<p key={i}>
 									{items.fromSentence} <br />
 									{items.toSentence}
 								</p>
@@ -43,17 +55,5 @@ export default class Examples extends Component {
 				</Query>
 			)
 		} else return null
-	}
-}
- */
-
-export default class Examples extends Component {
-	render() {
-		return (
-			<div>
-				<i> Heeeeeeeee Heeeeeeeee Heeeeeeeee Heeeeeeeee</i> <br />
-				<i> HeeHeeeeeeeee Heeeeeeeee Heeeeeeeee eeeee</i>
-			</div>
-		)
 	}
 }

@@ -24,27 +24,21 @@ type Examples {
   toSentence: String
 }
 
+type Images {
+  index: String
+  img: String
+}
+
 type Query {
-
-  getWords(
-    language: String! 
-    word: String!): [WordInfo]
-
-  getMicrosoft(
-    from: String! 
-    to: String! 
-    word: String!): [WordInfo]
-
+  getWords(language: String! word: String!): [WordInfo]
+  getMicrosoft(from: String! to: String! word: String!): [WordInfo]
   getExamples(from: String! to: String! word: String! translation: String!): [Examples]
+  getImages(word: String!): [Images]
 }
 
 
 type Mutation {
-  addWord(
-    language: String! 
-    word:String! 
-    translatedWord: String! 
-    partOfSpeech: String!) : String
+  addWord(language: String! word:String! translatedWord: String! partOfSpeech: String!) : String
 }
 `
 

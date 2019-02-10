@@ -6,6 +6,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import ImageStepper from './ImageStepper'
 import Buttons from './Buttons'
 import Words from './Words'
+import LoadMoreImages from './LoadMoreImages'
 
 const styles = theme => ({
 	card: {
@@ -36,27 +37,43 @@ const styles = theme => ({
 	}
 })
 
-
-
 class RecipeReviewCard extends React.Component {
+	state = {
+		loadImages: false
+	}
 	render() {
-				const { classes } = this.props
-	/* 	const data = this.props.data
+		const translatableWord = this.props.variables.word
+		const { classes } = this.props
+		const data = this.props.data
 		const translations = data.map((item, i) => {
 			return {
 				word: item.translatedWord,
 				partOfSpeech: item.partOfSpeech,
 				confidence: item.confidence
 			}
-		}) */
-		return (
-			<Card className={classes.card} >
-				<CardHeader title=/* {translations.word} */ 'Hello' />
-				<Words /* translations={translations} */ variables={this.props.variables} />
-				<ImageStepper />
-				<Buttons />
-			</Card>
-		)
+		})
+
+		const getMoreImages = () => {
+			this.setState({ loadImages: true })
+		}
+		if (this.state.loadImages === false)
+			return (
+				<Card className={classes.card}>
+					<CardHeader title={translatableWord} />
+					<Words translations={translations} variables={this.props.variables} />
+					<ImageStepper getMoreImages={getMoreImages} />
+					<Buttons />
+				</Card>
+			)
+		if (this.state.loadImages === true)
+			return (
+				<Card className={classes.card}>
+					<CardHeader title={translatableWord} />
+					<Words translations={translations} variables={this.props.variables} />
+					<LoadMoreImages word={translatableWord} />
+					<Buttons />
+				</Card>
+			)
 	}
 }
 
