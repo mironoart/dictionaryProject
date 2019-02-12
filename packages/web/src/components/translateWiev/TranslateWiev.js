@@ -75,7 +75,7 @@ class CenteredGrid extends Component {
 							multiline
 							margin="normal"
 							variant="outlined"
-							style={{ width: '100%' }}
+							style={{ width: '400px' }}
 							onChange={event => {
 								this.changeWord(event)
 							}}

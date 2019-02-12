@@ -17,7 +17,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import MenuIcon from '@material-ui/icons/Menu'
 
-import icons from '../media/icons'
+import icons from '../../media/icons'
 const drawerWidth = 240
 
 const styles = theme => ({

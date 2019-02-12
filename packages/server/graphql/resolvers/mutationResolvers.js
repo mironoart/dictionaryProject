@@ -10,7 +10,7 @@ const db = (language, word) => {
 export default {
 	addWord: async (_, { language, word, translatedWord, partOfSpeech }) => {
 		const id = uuid()
-
+		console.log(language, word, translatedWord, partOfSpeech)
 		// Making new word in DB
 		db(language, word)
 			.get()
@@ -71,7 +71,7 @@ export default {
 					}
 				}
 			})
-
+		console.log('Good')
 		return 'Good'
 	}
 }

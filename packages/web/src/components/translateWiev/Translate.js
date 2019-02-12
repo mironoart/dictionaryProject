@@ -16,7 +16,6 @@ export default class Translate extends Component {
 			}
 		`
 		const data = this.props.data
-
 		if (data.isReady) {
 			return (
 				<Query query={GET_LAUNCHES} variables={data}>

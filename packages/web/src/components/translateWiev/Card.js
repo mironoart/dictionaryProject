@@ -4,9 +4,10 @@ import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import ImageStepper from './ImageStepper'
-import Buttons from './Buttons'
+import AddButton from './AddButton'
 import Words from './Words'
 import LoadMoreImages from './LoadMoreImages'
+import { collectData } from '../choosenDataState.js'
 
 const styles = theme => ({
 	card: {
@@ -62,7 +63,10 @@ class RecipeReviewCard extends React.Component {
 					<CardHeader title={translatableWord} />
 					<Words translations={translations} variables={this.props.variables} />
 					<ImageStepper getMoreImages={getMoreImages} />
-					<Buttons />
+					<AddButton />
+					{collectData.collectTranslatableWord(translatableWord)}
+					{collectData.collectFromLanguage(this.props.variables.from)}
+					{collectData.collectPartOfSpeech(translations[0].partOfSpeech)}
 				</Card>
 			)
 		if (this.state.loadImages === true)
@@ -71,7 +75,7 @@ class RecipeReviewCard extends React.Component {
 					<CardHeader title={translatableWord} />
 					<Words translations={translations} variables={this.props.variables} />
 					<LoadMoreImages word={translatableWord} />
-					<Buttons />
+					<AddButton />
 				</Card>
 			)
 	}

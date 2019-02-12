@@ -42,6 +42,9 @@ class NativeSelects extends React.Component {
 		if (event.target.value === 'Russian') {
 			this.props.lang('ru')
 		}
+		if (event.target.value === 'Spanish') {
+			this.props.lang('es')
+		}
 		if (!event.target.value) {
 			this.props.lang('')
 		}
@@ -76,6 +79,7 @@ class NativeSelects extends React.Component {
 						<option value="" />
 						<option value={'English'}>English</option>
 						<option value={'Russian'}>Russian</option>
+						<option value={'Spanish'}>Spanish</option>
 					</Select>
 				</FormControl>
 			</div>

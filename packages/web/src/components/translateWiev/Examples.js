@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import Loading from './Loading'
-
+/* import ExamplesSelect from './ExamplesSelect'
+ */
 export default class Examples extends Component {
 	render() {
 		const GET_EXAMPLES = gql`
@@ -18,9 +19,12 @@ export default class Examples extends Component {
 				}
 			}
 		`
+
 		const variables = this.props.variables
+
 		variables.translation = this.props.word.toLowerCase()
 		const load = this.props.load
+
 		if (load) {
 			return (
 				<Query query={GET_EXAMPLES} variables={variables}>
@@ -38,19 +42,33 @@ export default class Examples extends Component {
 									<Loading />
 								</div>
 							)
-						if (error) return <p>ERROR</p>
-						if (!data) return 'Examples hadn'
-
-						const items = data.getExamples.map((items, i) => {
+						if (error)
 							return (
-								<p key={i}>
-									{items.fromSentence} <br />
-									{items.toSentence}
+								<p>
+									Error ocurred! <br /> Please try again
 								</p>
 							)
-						})
+						if (!data) return 'Examples hadn'
 
-						return items.splice(0, 5)
+						let items = data.getExamples.map((items, i) => {
+							return (
+								<div key={i} style={{ display: 'flex', alignItems: 'center' }}>
+									{/* <ExamplesSelect
+										examples={{
+											word: this.props.word,
+											from: items.fromSentence,
+											to: items.toSentence
+										}}
+									/> */}
+									<p>
+										{items.fromSentence} <br />
+										{items.toSentence}
+									</p>
+								</div>
+							)
+						})
+						items = items.splice(0, 5)
+						return <div style={{ width: '350px' }}>{items} </div>
 					}}
 				</Query>
 			)
