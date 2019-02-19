@@ -35,7 +35,6 @@ class CenteredGrid extends Component {
 			word: event.target.value
 		})
 	}
-
 	render() {
 		const readyToggle = trigger => {
 			this.state.isReady === true

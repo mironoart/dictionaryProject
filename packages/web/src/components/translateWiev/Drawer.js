@@ -11,11 +11,13 @@ import {
 	Divider,
 	IconButton,
 	ListItem,
-	ListItemText
+	ListItemText,
+	Avatar
 } from '@material-ui/core'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import MenuIcon from '@material-ui/icons/Menu'
+import { Link } from 'react-router-dom'
 
 import icons from '../../media/icons'
 const drawerWidth = 240
@@ -23,6 +25,12 @@ const drawerWidth = 240
 const styles = theme => ({
 	root: {
 		display: 'flex'
+	},
+
+	bigAvatar: {
+		margin: 10,
+		width: 60,
+		height: 60
 	},
 	appBar: {
 		zIndex: theme.zIndex.drawer + 1,
@@ -118,7 +126,7 @@ class MiniDrawer extends React.Component {
 							<MenuIcon />
 						</IconButton>
 						<Typography variant="h6" color="inherit" noWrap>
-							TransCLITOR by Oleg
+							Name here
 						</Typography>
 					</Toolbar>
 				</AppBar>
@@ -136,12 +144,28 @@ class MiniDrawer extends React.Component {
 					}}
 					open={this.state.open}
 				>
-					<div className={classes.toolbar}>
-						<IconButton onClick={this.handleDrawerClose}>
-							{theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-						</IconButton>
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'space-between'
+						}}
+					>
+						{/* <Link to="/auth"> */}
+						<a href="http://localhost:4000/auth/google">
+							<Avatar
+								alt="Remy Sharp"
+								src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png"
+								className={classes.bigAvatar}
+							/>
+						</a>
+						{/* </Link> */}
+						<div className={classes.toolbar}>
+							<IconButton onClick={this.handleDrawerClose}>
+								{theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+							</IconButton>
+						</div>
 					</div>
-
 					<Divider />
 					<List>
 						{icons('blue').map((item, index) => {

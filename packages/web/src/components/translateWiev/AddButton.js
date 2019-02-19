@@ -56,7 +56,7 @@ class FloatingActionButtons extends React.Component {
 							style={{ display: 'flex', flexDirection: 'row', marginBottom: '10px' }}
 						>
 							{collectData.addCollectedDataToDB()}
-							<Button variant="contained" color="primary" onClick={this.trigger}>
+							<Button variant="contained" color="primary" onClick={this.trigger} style ={{marginLeft:'5px'}}>
 								No
 							</Button>
 						</div>
