@@ -1,5 +1,6 @@
 var admin = require('firebase-admin')
 import { v4 as uuid } from 'uuid'
+import authCheck from '../utils/authCheck'
 
 const db = (language, word) => {
 	return admin
@@ -7,8 +8,15 @@ const db = (language, word) => {
 		.collection(language)
 		.doc(word)
 }
+const dbUser = id => {
+	return admin
+		.firestore()
+		.collection('Users')
+		.doc(id)
+}
 export default {
 	addWord: async (_, { language, word, translatedWord, partOfSpeech }) => {
+		// ********** ADDING WORD TO MY DB ***************
 		const id = uuid()
 		console.log(language, word, translatedWord, partOfSpeech)
 		// Making new word in DB
@@ -71,7 +79,32 @@ export default {
 					}
 				}
 			})
+
 		console.log('Good')
 		return 'Good'
+	},
+	// ********** ADDING WORD TO USER COLLECTION ***************
+	addToUserCollection: async (
+		_,
+		{ collectionName, word, translations, sentence, image, time },
+		ctx
+	) => {
+		let userId
+		try {
+			userId = authCheck(ctx)
+		} catch (error) {
+			throw error
+		}
+
+		await dbUser(userId)
+			.collection(collectionName)
+			.add({
+				word: word,
+				translations: translations,
+				sentences: sentence,
+				image: image,
+				time: time
+			})
+		return 'Nice'
 	}
 }

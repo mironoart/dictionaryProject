@@ -12,7 +12,7 @@ const db = id => {
 //serializing and sending to the browser
 passport.serializeUser((user, done) => {
 	console.log('serialize')
-	done(null, user.id)
+	done(null, user.info.id)
 })
 
 //deserializing when resiving from browser
@@ -37,7 +37,6 @@ passport.use(
 		},
 		(accessToken, refreshToken, profile, done) => {
 			// third
-			console.log('done')
 			const userdata = profile._json
 			const id = userdata.id
 
@@ -45,9 +44,16 @@ passport.use(
 				.get()
 				.then(docSnapshot => {
 					const newUser = {
-						id: id,
-						username: userdata.name.givenName,
-						image: userdata.image.url
+						info: {
+							id: id,
+							username: userdata.name.givenName,
+							image: userdata.image.url,
+							email: userdata.emails[0].value
+						},
+						config: {
+							quantityOfWords: 30,
+							lengDirection: 'straight'
+						}
 					}
 					if (!docSnapshot.exists) {
 						// If user not exist -> creating new one

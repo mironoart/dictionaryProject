@@ -34,7 +34,7 @@ export default class Translate extends Component {
 								</div>
 							)
 						/* if (error) return <p>ERROR</p> */
-						if (data === undefined) return 'No such word'
+						if (error) return <p>{error.message} </p>
 						return <Card data={data.getMicrosoft} variables={this.props.data} />
 					}}
 				</Query>

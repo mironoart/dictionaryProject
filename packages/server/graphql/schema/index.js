@@ -29,16 +29,31 @@ type Images {
   img: String
 }
 
+type Collections {
+  id: String
+}
+
+type CollectionData {
+  word: String
+  translations: String
+  sentences: String
+  image: String
+  time: String
+}
+
 type Query {
   getWords(language: String! word: String!): [WordInfo]
   getMicrosoft(from: String! to: String! word: String!): [WordInfo]
   getExamples(from: String! to: String! word: String! translation: String!): [Examples]
   getImages(word: String!): [Images]
+  getCollections: [Collections]
+  getCollectionsData(collectionName: String!): [CollectionData]
 }
 
 
 type Mutation {
-  addWord(language: String! word:String! translatedWord: String! partOfSpeech: String!) : String
+  addWord(language: String! word:String! translatedWord: String! partOfSpeech: String! ) : String
+  addToUserCollection(collectionName: String! word: String! translations: String! sentence: String! image: String! time: String!) :String
 }
 `
 

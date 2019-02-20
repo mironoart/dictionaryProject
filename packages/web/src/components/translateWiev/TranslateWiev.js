@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button'
 class CenteredGrid extends Component {
 	constructor(props) {
 		super(props)
+
 		this.state = {
 			from: '',
 			to: '',
@@ -35,6 +36,7 @@ class CenteredGrid extends Component {
 			word: event.target.value
 		})
 	}
+
 	render() {
 		const readyToggle = trigger => {
 			this.state.isReady === true

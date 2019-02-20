@@ -6,9 +6,12 @@ export default {
 		getWords: queryResolvers.getWords,
 		getMicrosoft: queryResolvers.getMicrosoft,
 		getExamples: queryResolvers.getExamples,
-		getImages: queryResolvers.getImages
+		getImages: queryResolvers.getImages,
+		getCollections: queryResolvers.getCollections,
+		getCollectionsData: queryResolvers.getCollectionsData
 	},
 	Mutation: {
-		addWord: mutationResolvers.addWord
+		addWord: mutationResolvers.addWord,
+		addToUserCollection: mutationResolvers.addToUserCollection
 	}
 }

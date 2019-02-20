@@ -2,7 +2,6 @@ import { Container, Subscribe } from 'unstated'
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
 
 export class wordData extends Container {
