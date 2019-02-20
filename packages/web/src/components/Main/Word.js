@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Collapse from '@material-ui/core/Collapse'
 import Examples from './Examples'
 import Chip from '@material-ui/core/Chip'
-import { collectData } from '../choosenDataState.js'
+import { collectData } from '../../resolvers/choosenDataState.js'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 const styles = theme => ({

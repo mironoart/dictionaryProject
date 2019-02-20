@@ -6,20 +6,15 @@ import {
 	Drawer,
 	AppBar,
 	Toolbar,
-	List,
 	Typography,
 	Divider,
 	IconButton,
-	ListItem,
-	ListItemText,
 	Avatar
 } from '@material-ui/core'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import MenuIcon from '@material-ui/icons/Menu'
-import { Link } from 'react-router-dom'
-
-import icons from '../../media/icons'
+import Icons from './Icons.js'
 const drawerWidth = 240
 
 const styles = theme => ({
@@ -105,7 +100,7 @@ class MiniDrawer extends React.Component {
 
 	render() {
 		const { classes, theme } = this.props
-
+		const userData = JSON.parse(localStorage.getItem('user'))[0] || ''
 		return (
 			<div className={classes.root}>
 				<AppBar
@@ -151,15 +146,14 @@ class MiniDrawer extends React.Component {
 							justifyContent: 'space-between'
 						}}
 					>
-						{/* <Link to="/auth"> */}
 						<a href="http://localhost:4000/auth/google">
 							<Avatar
-								alt="Remy Sharp"
-								src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/female1-512.png"
+								alt={userData.username}
+								src={userData.image}
 								className={classes.bigAvatar}
 							/>
 						</a>
-						{/* </Link> */}
+						<h3 style={{ margin: 'auto' }}> {userData.username}</h3>
 						<div className={classes.toolbar}>
 							<IconButton onClick={this.handleDrawerClose}>
 								{theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
@@ -167,16 +161,7 @@ class MiniDrawer extends React.Component {
 						</div>
 					</div>
 					<Divider />
-					<List>
-						{icons('blue').map((item, index) => {
-							return (
-								<ListItem key={index.toString()} button>
-									{item.body}
-									<ListItemText primary={item.name} />
-								</ListItem>
-							)
-						})}
-					</List>
+					<Icons />
 				</Drawer>
 				<main className={classes.content}>
 					<div className={classes.toolbar} />

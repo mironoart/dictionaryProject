@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Fab from '@material-ui/core/Fab'
-import { collectData } from '../choosenDataState.js'
+import { collectData } from '../../resolvers/choosenDataState.js'
 import AddIcon from '@material-ui/icons/Add'
 import Button from '@material-ui/core/Button'
 
@@ -56,7 +56,12 @@ class FloatingActionButtons extends React.Component {
 							style={{ display: 'flex', flexDirection: 'row', marginBottom: '10px' }}
 						>
 							{collectData.addCollectedDataToDB()}
-							<Button variant="contained" color="primary" onClick={this.trigger} style ={{marginLeft:'5px'}}>
+							<Button
+								variant="contained"
+								color="primary"
+								onClick={this.trigger}
+								style={{ marginLeft: '5px' }}
+							>
 								No
 							</Button>
 						</div>

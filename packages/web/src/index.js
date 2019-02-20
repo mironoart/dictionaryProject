@@ -8,13 +8,29 @@ import { Provider } from 'unstated'
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
+if (localStorage.getItem('user') === null) {
+	console.log('enter')
+	localStorage.setItem(
+		'user',
+		JSON.stringify([
+			{
+				lengDirection: 'straight',
+				quantityOfWords: 30,
+				email: '',
+				image:
+					'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRAkdqTCru5stUR5DC_hS4q0-UcW3xpzZ-Xg5rSuVsk4fPWHbX2Q',
+				username: ''
+			}
+		])
+	)
+}
 
 if (cookies.get('token') !== undefined) {
 	localStorage.setItem('token', JSON.stringify(cookies.get('token')))
 }
-if (localStorage.getItem('token') === null) {
+/* if (localStorage.getItem('token') === null) {
 	localStorage.clear()
-}
+} */
 const authLink = setContext((_, { headers }) => {
 	// get the authentication token from local storage if it exists
 	const token = JSON.parse(localStorage.getItem('token'))

@@ -40,6 +40,13 @@ type CollectionData {
   image: String
   time: String
 }
+type UserData {
+  lengDirection: String
+  quantityOfWords: String
+  email: String
+  image: String
+  username: String
+}
 
 type Query {
   getWords(language: String! word: String!): [WordInfo]
@@ -48,6 +55,7 @@ type Query {
   getImages(word: String!): [Images]
   getCollections: [Collections]
   getCollectionsData(collectionName: String!): [CollectionData]
+  getUserData: [UserData]
 }
 
 

@@ -101,5 +101,30 @@ export default {
 			})
 		console.log('Good Returned')
 		return collectionData
+	},
+	getUserData: async (_, __, ctx) => {
+		let userId
+		let userDataArr = []
+		try {
+			userId = authCheck(ctx)
+		} catch (error) {
+			throw error
+		}
+
+		await dbUser(userId)
+			.get()
+			.then(snap => {
+				userDataArr = [
+					{
+						lengDirection: snap.data().config.lengDirection,
+						quantityOfWords: snap.data().config.quantityOfWords,
+						email: snap.data().info.email,
+						image: snap.data().info.image,
+						username: snap.data().info.username
+					}
+				]
+			})
+		console.log(userDataArr)
+		return userDataArr
 	}
 }

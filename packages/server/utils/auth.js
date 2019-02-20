@@ -17,6 +17,6 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 	const token = jwt.sign(req.user.info.id, process.env.COOKIE_KEY)
 	console.log(token)
 	res.cookie('token', token, { maxAge: 1000, httpOnly: false })
-	res.redirect('http://localhost:3000')
+	res.redirect('http://localhost:3000/success')
 })
 module.exports = router

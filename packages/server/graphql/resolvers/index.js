@@ -8,7 +8,8 @@ export default {
 		getExamples: queryResolvers.getExamples,
 		getImages: queryResolvers.getImages,
 		getCollections: queryResolvers.getCollections,
-		getCollectionsData: queryResolvers.getCollectionsData
+		getCollectionsData: queryResolvers.getCollectionsData,
+		getUserData: queryResolvers.getUserData
 	},
 	Mutation: {
 		addWord: mutationResolvers.addWord,

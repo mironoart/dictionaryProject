@@ -7,7 +7,7 @@ import ImageStepper from './ImageStepper'
 import AddButton from './AddButton'
 import Words from './Words'
 import LoadMoreImages from './LoadMoreImages'
-import { collectData } from '../choosenDataState.js'
+import { collectData } from '../../resolvers/choosenDataState.js'
 
 const styles = theme => ({
 	card: {

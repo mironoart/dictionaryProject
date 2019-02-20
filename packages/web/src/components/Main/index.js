@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Grid, TextField } from '@material-ui/core'
-import Drawer from './Drawer'
+import Drawer from '../Common/Drawer'
 import Form from './formControl'
 import Translate from './Translate'
 import Button from '@material-ui/core/Button'
