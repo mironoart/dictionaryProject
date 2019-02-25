@@ -30,7 +30,7 @@ type Images {
 }
 
 type Collections {
-  id: String
+  name: String
 }
 
 type CollectionData {

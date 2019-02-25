@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
 import Card from './Card'
-import Loading from './Loading'
+import Loading from '../Common/Loading'
 
 export default class Translate extends Component {
 	render(props) {

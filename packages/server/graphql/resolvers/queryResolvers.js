@@ -66,16 +66,16 @@ export default {
 		} catch (error) {
 			throw error
 		}
-		let collectionsId = []
+		let collectionsName = []
 		await dbUser(userId)
 			.getCollections()
 			.then(collections => {
 				collections.forEach(collection => {
-					collectionsId.push({ id: collection.id })
+					collectionsName.push({ name: collection.id })
 				})
 			})
-		console.log(collectionsId)
-		return collectionsId
+		console.log(collectionsName)
+		return collectionsName
 	},
 	getCollectionsData: async (_, { collectionName }, ctx) => {
 		let userId
@@ -99,7 +99,7 @@ export default {
 					})
 				})
 			})
-		console.log('Good Returned')
+		console.log(collectionData)
 		return collectionData
 	},
 	getUserData: async (_, __, ctx) => {

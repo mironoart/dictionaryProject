@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
-import Loading from './Loading'
+import Loading from '../Common/Loading'
 /* import ExamplesSelect from './ExamplesSelect'
  */
 export default class Examples extends Component {
