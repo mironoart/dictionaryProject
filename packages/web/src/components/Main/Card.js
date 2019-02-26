@@ -6,7 +6,6 @@ import CardHeader from '@material-ui/core/CardHeader'
 import ImageStepper from './ImageStepper'
 import AddButton from './AddButton'
 import Words from './Words'
-import LoadMoreImages from './LoadMoreImages'
 import { collectData } from '../../resolvers/choosenDataState.js'
 
 const styles = theme => ({
@@ -39,13 +38,6 @@ const styles = theme => ({
 })
 
 class RecipeReviewCard extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			loadImages: false
-		}
-	}
-
 	render() {
 		const translatableWord = this.props.variables.word
 		const { classes } = this.props
@@ -58,30 +50,17 @@ class RecipeReviewCard extends React.Component {
 			}
 		})
 
-		const getMoreImages = () => {
-			this.setState({ loadImages: true })
-		}
-		if (this.state.loadImages === false)
-			return (
-				<Card className={classes.card}>
-					<CardHeader title={translatableWord} />
-					<Words translations={translations} variables={this.props.variables} />
-					<ImageStepper getMoreImages={getMoreImages} />
-					<AddButton />
-					{collectData.collectTranslatableWord(translatableWord)}
-					{collectData.collectFromLanguage(this.props.variables.from)}
-					{collectData.collectPartOfSpeech(translations[0].partOfSpeech)}
-				</Card>
-			)
-		if (this.state.loadImages === true)
-			return (
-				<Card className={classes.card}>
-					<CardHeader title={translatableWord} />
-					<Words translations={translations} variables={this.props.variables} />
-					<LoadMoreImages word={translatableWord} />
-					<AddButton />
-				</Card>
-			)
+		return (
+			<Card className={classes.card}>
+				<CardHeader title={translatableWord} />
+				<Words translations={translations} variables={this.props.variables} />
+				<ImageStepper translatableWord={translatableWord} />
+				<AddButton />
+				{collectData.collectTranslatableWord(translatableWord)}
+				{collectData.collectFromLanguage(this.props.variables.from)}
+				{collectData.collectPartOfSpeech(translations[0].partOfSpeech)}
+			</Card>
+		)
 	}
 }
 

@@ -5,7 +5,20 @@ import MobileStepper from '@material-ui/core/MobileStepper'
 import Button from '@material-ui/core/Button'
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
+import Loading from '../Common/Loading'
+
 import { collectData } from '../../resolvers/choosenDataState.js'
+import { ApolloConsumer } from 'react-apollo'
+import gql from 'graphql-tag'
+
+const GET_IMAGES = gql`
+	query getimages($word: String!) {
+		getImages(word: $word) {
+			index
+			img
+		}
+	}
+`
 
 const styles = theme => ({
 	root: {
@@ -33,7 +46,15 @@ class TextMobileStepper extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			activeStep: 0
+			loading: false,
+			activeStep: 0,
+			showButton: 'flex',
+			showImages: 'none',
+			images: [
+				{
+					image: ''
+				}
+			]
 		}
 	}
 
@@ -48,58 +69,81 @@ class TextMobileStepper extends React.Component {
 			activeStep: prevState.activeStep - 1
 		}))
 	}
-
-	render(props) {
-		const { classes, theme } = this.props
-		const { activeStep } = this.state
-		let maxSteps = 0
-		let showButton = 'flex'
-		let showImages = 'none'
-		let images = [
-			{
-				image: ''
+	fetchImagesUrl = arr => {
+		let images = arr.getImages.map((item, index) => {
+			return {
+				key: index,
+				image: item.img
 			}
-		]
-		if (this.props.images) {
-			images = this.props.images
-			maxSteps = this.props.images.length
-			showButton = 'none'
-			showImages = 'block'
-		}
+		})
+		images = images.splice(0, 10)
+		this.setState({
+			loading: false,
+			images: images,
+			showButton: 'none',
+			showImages: 'block'
+		})
+	}
+	render() {
+		const state = this.state
+		const { activeStep } = this.state
+		const { classes, theme } = this.props
+		let maxSteps = 10
 
-		if (images.image !== undefined) {
-			collectData.collectImgUrl(images.image[this.state.activeStep])
-		}
-
-		return (
-			<div className={classes.root}>
+		if (state.loading === true)
+			return (
 				<div
-					className={classes.img}
 					style={{
-						display: showButton,
+						display: 'flex',
 						justifyContent: 'center',
 						alignItems: 'center',
 						height: '303px'
 					}}
 				>
-					<Button
-						variant="contained"
-						color="primary"
-						onClick={this.props.getMoreImages}
-					>
-						Tap to load more images...
-					</Button>
+					<Loading />
 				</div>
-				<div className={classes.root} style={{ display: showImages }}>
+			)
+		return (
+			<div className={classes.root}>
+				{collectData.collectImgUrl(state.images[state.activeStep].image)}
+
+				<div
+					className={classes.img}
+					style={{
+						display: state.showButton,
+						justifyContent: 'center',
+						alignItems: 'center',
+						height: '303px'
+					}}
+				>
+					<ApolloConsumer>
+						{client => (
+							<Button
+								variant="contained"
+								color="primary"
+								onClick={async () => {
+									this.setState({ loading: true })
+									const { data } = await client.query({
+										query: GET_IMAGES,
+										variables: { word: this.props.translatableWord }
+									})
+									this.fetchImagesUrl(data)
+								}}
+							>
+								Tap to load more images...
+							</Button>
+						)}
+					</ApolloConsumer>
+				</div>
+				<div className={classes.root} style={{ display: state.showImages }}>
 					<div className={classes.img}>
 						<img
 							className={classes.img}
 							alt={'Name'}
-							src={images[activeStep].image}
+							src={state.images[activeStep].image}
 							style={{ width: '100%' }}
 						/>
 					</div>
-
 					<MobileStepper
 						steps={maxSteps}
 						position="static"

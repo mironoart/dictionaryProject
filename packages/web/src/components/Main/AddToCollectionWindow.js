@@ -43,6 +43,7 @@ function AddToCollectionWindow(props) {
 		marginTop: '-600px',
 		position: 'absolute'
 	}
+	console.log(props.variables)
 
 	const addToUserDb = event => {
 		const { word, translatedWord, sentence, image } = props.variables

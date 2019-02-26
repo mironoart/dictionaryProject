@@ -47,6 +47,7 @@ class Word extends Component {
 			: this.setState({ displayUp: 'none', word: '' })
 	}
 	render() {
+		console.log(this.state.word)
 		return (
 			<div
 				style={{

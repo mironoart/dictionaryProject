@@ -25,6 +25,7 @@ export class wordData extends Container {
 	}
 	updateTranslatedWord(translatedWord) {
 		let arr = this.state.translatedWords
+		console.log('Word---', translatedWord)
 
 		if (
 			arr.every(item => {
@@ -180,7 +181,7 @@ class UserData {
 		return (
 			<Subscribe to={[wordData]}>
 				{counter => {
-					counter.updateImgUrl(url)
+					if (url !== '') counter.updateImgUrl(url)
 					console.log(counter.state)
 					return null
 				}}
@@ -189,7 +190,7 @@ class UserData {
 	}
 
 	addCollectedDataToDB = () => {
-		console.log('Entered')
+		console.log('Entered into collect data')
 
 		return (
 			<Subscribe to={[wordData]}>
@@ -206,7 +207,7 @@ class UserData {
 						translatedWord: counter.state.translatedWords[0],
 						sentence: 'Here Sentence',
 						partOfSpeech: counter.state.partOfSpeech,
-						image: 'imageHere'
+						image: counter.state.imgUrl
 					}
 
 					const ADD_DATA_TO_DB = gql`
