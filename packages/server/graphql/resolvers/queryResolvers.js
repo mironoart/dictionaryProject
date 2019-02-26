@@ -91,6 +91,7 @@ export default {
 			.then(snapshot => {
 				snapshot.forEach(doc => {
 					collectionData.push({
+						id: doc.data().id,
 						word: doc.data().word,
 						translations: doc.data().translations,
 						sentences: doc.data().sentences,

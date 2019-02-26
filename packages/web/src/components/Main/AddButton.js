@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Fab from '@material-ui/core/Fab'
 import { collectData } from '../../resolvers/choosenDataState.js'
 import AddIcon from '@material-ui/icons/Add'
-import Button from '@material-ui/core/Button'
 
 const styles = theme => ({
 	fab: {
@@ -40,34 +39,7 @@ class FloatingActionButtons extends React.Component {
 					</Fab>
 				</div>
 			)
-		} else
-			return (
-				<div
-					style={{
-						display: 'flex',
-						justifyContent: 'center',
-						flexDirection: 'column',
-						alignItems: 'center'
-					}}
-				>
-					<React.Fragment>
-						<p> Do you want add this card to your collection? </p>
-						<div
-							style={{ display: 'flex', flexDirection: 'row', marginBottom: '10px' }}
-						>
-							{collectData.addCollectedDataToDB()}
-							<Button
-								variant="contained"
-								color="primary"
-								onClick={this.trigger}
-								style={{ marginLeft: '5px' }}
-							>
-								No
-							</Button>
-						</div>
-					</React.Fragment>
-				</div>
-			)
+		} else return <div>{collectData.addCollectedDataToDB()}</div>
 	}
 }
 

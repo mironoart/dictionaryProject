@@ -5,6 +5,7 @@ import MobileStepper from '@material-ui/core/MobileStepper'
 import Button from '@material-ui/core/Button'
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft'
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight'
+import { collectData } from '../../resolvers/choosenDataState.js'
 
 const styles = theme => ({
 	root: {
@@ -64,6 +65,10 @@ class TextMobileStepper extends React.Component {
 			maxSteps = this.props.images.length
 			showButton = 'none'
 			showImages = 'block'
+		}
+
+		if (images.image !== undefined) {
+			collectData.collectImgUrl(images.image[this.state.activeStep])
 		}
 
 		return (

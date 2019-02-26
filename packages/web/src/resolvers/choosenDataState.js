@@ -2,7 +2,7 @@ import { Container, Subscribe } from 'unstated'
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
-import Button from '@material-ui/core/Button'
+import AddToCollectionWindow from '../components/Main/AddToCollectionWindow'
 
 export class wordData extends Container {
 	state = {
@@ -25,15 +25,18 @@ export class wordData extends Container {
 	}
 	updateTranslatedWord(translatedWord) {
 		let arr = this.state.translatedWords
+
 		if (
 			arr.every(item => {
-				if (item !== translatedWord) return true
+				if (item !== translatedWord && item !== undefined) return true
+				else return false
 			})
 		) {
 			arr.push(translatedWord)
 		} else {
 			arr = arr.filter(item => {
 				if (item !== translatedWord) return item
+				else return null
 			})
 		}
 
@@ -51,12 +54,14 @@ export class wordData extends Container {
 		if (
 			arr.every(item => {
 				if (item !== examples) return true
+				else return false
 			})
 		) {
 			arr.push(examples)
 		} else {
 			arr = arr.filter(item => {
 				if (item.from !== examples.from && item.to !== examples.to) return item
+				else return null
 			})
 		}
 
@@ -103,6 +108,16 @@ export class wordData extends Container {
 			language: this.state.language
 		}
 	}
+	updateImgUrl = url => {
+		this.state = {
+			fromWord: this.state.fromWord,
+			translatedWords: this.state.translatedWords,
+			examples: this.state.examples,
+			imgUrl: url,
+			partOfSpeech: this.state.partOfSpeech,
+			language: this.state.language
+		}
+	}
 }
 class UserData {
 	collectTranslatableWord = translatableWord => {
@@ -117,11 +132,13 @@ class UserData {
 		)
 	}
 
-	collectTranslations = traslation => {
+	collectTranslations = translation => {
 		return (
 			<Subscribe to={[wordData]}>
 				{counter => {
-					if (traslation !== '') counter.updateTranslatedWord(traslation)
+					if (translation !== '') {
+						counter.updateTranslatedWord(translation)
+					}
 					return null
 				}}
 			</Subscribe>
@@ -133,7 +150,6 @@ class UserData {
 			<Subscribe to={[wordData]}>
 				{counter => {
 					if (counter.state) counter.updateExamples(examples)
-					console.log(counter.state)
 					return null
 				}}
 			</Subscribe>
@@ -144,7 +160,6 @@ class UserData {
 			<Subscribe to={[wordData]}>
 				{counter => {
 					counter.updateFromLanguage(leng)
-					console.log(counter.state)
 					return null
 				}}
 			</Subscribe>
@@ -161,12 +176,21 @@ class UserData {
 			</Subscribe>
 		)
 	}
+	collectImgUrl = url => {
+		return (
+			<Subscribe to={[wordData]}>
+				{counter => {
+					counter.updateImgUrl(url)
+					console.log(counter.state)
+					return null
+				}}
+			</Subscribe>
+		)
+	}
 
 	addCollectedDataToDB = () => {
 		console.log('Entered')
-		const successInfo = variables => {
-			alert('Successfuly added')
-		}
+
 		return (
 			<Subscribe to={[wordData]}>
 				{counter => {
@@ -175,6 +199,14 @@ class UserData {
 						word: counter.state.fromWord,
 						translatedWord: counter.state.translatedWords[0],
 						partOfSpeech: counter.state.partOfSpeech
+					}
+					const userVariables = {
+						language: counter.state.language,
+						word: counter.state.fromWord,
+						translatedWord: counter.state.translatedWords[0],
+						sentence: 'Here Sentence',
+						partOfSpeech: counter.state.partOfSpeech,
+						image: 'imageHere'
 					}
 
 					const ADD_DATA_TO_DB = gql`
@@ -195,15 +227,15 @@ class UserData {
 
 					console.log(variables)
 					if (counter.state.fromWord === []) return 'Choose translation!'
+					//if (counter.state.translation === undefined)
+					//	return 'Translation is undefined!'
 					else {
 						return (
 							<Mutation mutation={ADD_DATA_TO_DB} variables={variables}>
 								{addWord => {
 									return (
 										<div onClick={addWord}>
-											<Button variant="contained" color="primary" onClick={successInfo}>
-												Yes
-											</Button>
+											<AddToCollectionWindow variables={userVariables} />
 										</div>
 									)
 								}}

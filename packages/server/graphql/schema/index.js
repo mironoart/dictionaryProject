@@ -34,6 +34,7 @@ type Collections {
 }
 
 type CollectionData {
+  id: ID
   word: String
   translations: String
   sentences: String

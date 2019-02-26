@@ -39,9 +39,13 @@ const styles = theme => ({
 })
 
 class RecipeReviewCard extends React.Component {
-	state = {
-		loadImages: false
+	constructor(props) {
+		super(props)
+		this.state = {
+			loadImages: false
+		}
 	}
+
 	render() {
 		const translatableWord = this.props.variables.word
 		const { classes } = this.props

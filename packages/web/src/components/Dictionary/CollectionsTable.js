@@ -228,7 +228,7 @@ function ReactVirtualizedTable(props) {
 				/>
 			</Paper>
 		)
-	} else return <p>Loading...</p>
+	}
 }
 
 export default graphql(GET_COLLECTIONS)(ReactVirtualizedTable)

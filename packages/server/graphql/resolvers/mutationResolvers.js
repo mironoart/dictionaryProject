@@ -80,7 +80,7 @@ export default {
 				}
 			})
 
-		console.log('Good')
+		console.log('Word Added to DB')
 		return 'Good'
 	},
 	// ********** ADDING WORD TO USER COLLECTION ***************
@@ -99,12 +99,14 @@ export default {
 		await dbUser(userId)
 			.collection(collectionName)
 			.add({
+				id: uuid(),
 				word: word,
 				translations: translations,
 				sentences: sentence,
 				image: image,
 				time: time
 			})
-		return 'Nice'
+		console.log('Added to user collection')
+		return 'Added'
 	}
 }
