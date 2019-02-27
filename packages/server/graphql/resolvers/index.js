@@ -1,5 +1,7 @@
 import queryResolvers from './queryResolvers'
 import mutationResolvers from './mutationResolvers'
+import collectionsAddNew from './mutation/collectionsAddNew'
+import deleteWord from './mutation/deleteWord'
 
 export default {
 	Query: {
@@ -13,6 +15,8 @@ export default {
 	},
 	Mutation: {
 		addWord: mutationResolvers.addWord,
-		addToUserCollection: mutationResolvers.addToUserCollection
+		addToUserCollection: mutationResolvers.addToUserCollection,
+		addNewCollection: collectionsAddNew.addNewCollection,
+		deleteWord: deleteWord.deleteWord
 	}
 }

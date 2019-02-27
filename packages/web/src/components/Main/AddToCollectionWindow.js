@@ -5,6 +5,7 @@ import gql from 'graphql-tag'
 import { graphql, Query } from 'react-apollo'
 import Loading from '../Common/Loading'
 import Button from '@material-ui/core/Button'
+import TextField from '@material-ui/core/TextField'
 
 const GET_COLLECTIONS = gql`
 	query getCollections {
@@ -33,10 +34,11 @@ const ADD_TO_USER_COLLECTION = gql`
 	}
 `
 function AddToCollectionWindow(props) {
+	let newCollectionName = ''
 	const styles = {
 		display: 'flex',
 		flexDirection: 'column',
-		justifyContent: 'center',
+
 		alignItems: 'center',
 		height: '600px',
 		width: '400px',
@@ -47,16 +49,30 @@ function AddToCollectionWindow(props) {
 
 	const addToUserDb = event => {
 		const { word, translatedWord, sentence, image } = props.variables
+		console.log(event)
+
+		let collectionName = ''
+		if (typeof event === typeof '') {
+			collectionName = event
+		} else {
+			let str = event.target.innerText
+			collectionName = str.charAt(0).toUpperCase() + str.slice(1)
+		}
 		props.mutate({
 			variables: {
-				collectionName: event.target.innerText,
+				collectionName: collectionName,
 				word: word,
 				translations: translatedWord,
 				sentence: sentence,
-				image: image,
+				image: image || '',
 				time: new Date().getTime().toString()
 			}
 		})
+		alert('Successfuly added!')
+		window.location.reload()
+	}
+	const setNewCollectionName = event => {
+		newCollectionName = event.target.value
 	}
 
 	return (
@@ -75,6 +91,7 @@ function AddToCollectionWindow(props) {
 						{data.getCollections.map((item, index) => {
 							return (
 								<Button
+									style={{ marginBottom: '5px' }}
 									variant="contained"
 									color="primary"
 									key={index}
@@ -84,6 +101,20 @@ function AddToCollectionWindow(props) {
 								</Button>
 							)
 						})}
+						<h2>Create New Collection: </h2>
+						<TextField
+							style={{ marginBottom: '5px' }}
+							variant="outlined"
+							id="custom-css-outlined-input"
+							onChange={event => setNewCollectionName(event)}
+						/>
+						<Button
+							variant="contained"
+							color="primary"
+							onClick={() => addToUserDb(newCollectionName)}
+						>
+							Add
+						</Button>
 					</Paper>
 				)
 			}}

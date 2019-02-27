@@ -235,7 +235,7 @@ class UserData {
 							<Mutation mutation={ADD_DATA_TO_DB} variables={variables}>
 								{addWord => {
 									return (
-										<div onClick={addWord}>
+										<div /* onClick={addWord} */>
 											<AddToCollectionWindow variables={userVariables} />
 										</div>
 									)

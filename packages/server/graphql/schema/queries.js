@@ -1,8 +1,4 @@
-import { makeExecutableSchema } from 'graphql-tools'
-import resolvers from '../resolvers'
-
-const typeDefs = `
-
+export default `
 type WordInfo {
   microsoftFrequency: String
   partOfSpeech: String
@@ -58,17 +54,4 @@ type Query {
   getCollectionsData(collectionName: String!): [CollectionData]
   getUserData: [UserData]
 }
-
-
-type Mutation {
-  addWord(language: String! word:String! translatedWord: String! partOfSpeech: String! ) : String
-  addToUserCollection(collectionName: String! word: String! translations: String! sentence: String! image: String! time: String!) :String
-}
 `
-
-const schema = makeExecutableSchema({
-	typeDefs,
-	resolvers
-})
-
-export default schema

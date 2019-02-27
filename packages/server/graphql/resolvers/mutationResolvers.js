@@ -95,11 +95,12 @@ export default {
 		} catch (error) {
 			throw error
 		}
-
+		let id = uuid()
 		await dbUser(userId)
 			.collection(collectionName)
-			.add({
-				id: uuid(),
+			.doc(id)
+			.set({
+				id: id,
 				word: word,
 				translations: translations,
 				sentences: sentence,

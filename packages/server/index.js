@@ -3,7 +3,7 @@ var serviceAccount = require('./ServiceAccountSettings.json')
 import { GraphQLServer } from 'graphql-yoga'
 import 'dotenv/config' // same as require('dotenv').config()
 import router from './utils/auth'
-import schema from './graphql/schema'
+import schema from './graphql'
 import passport from 'passport'
 
 admin.initializeApp({
