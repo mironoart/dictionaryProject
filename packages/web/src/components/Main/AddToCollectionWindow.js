@@ -55,8 +55,7 @@ function AddToCollectionWindow(props) {
 		if (typeof event === typeof '') {
 			collectionName = event
 		} else {
-			let str = event.target.innerText
-			collectionName = str.charAt(0).toUpperCase() + str.slice(1)
+			collectionName = event.target.innerText
 		}
 		props.mutate({
 			variables: {
@@ -90,15 +89,13 @@ function AddToCollectionWindow(props) {
 						<h2>Choose collection: </h2>
 						{data.getCollections.map((item, index) => {
 							return (
-								<Button
-									style={{ marginBottom: '5px' }}
-									variant="contained"
-									color="primary"
+								<h3
+									style={{ marginBottom: '5px', cursor: 'pointer' }}
 									key={index}
 									onClick={event => addToUserDb(event)}
 								>
 									{item.name}
-								</Button>
+								</h3>
 							)
 						})}
 						<h2>Create New Collection: </h2>

@@ -15,6 +15,7 @@ export default class index extends Component {
 			choosenWord: ''
 		}
 	}
+
 	showWordsTable = collection => {
 		this.setState({
 			isWordsTableHidden: false,
@@ -35,11 +36,15 @@ export default class index extends Component {
 				<Drawer />
 
 				<Grid container direction="row" justify="center" alignItems="center">
-					<CollectionsTable showWordsTable={this.showWordsTable} />
+					<CollectionsTable
+						showWordsTable={this.showWordsTable}
+						getWords={this.getWords}
+					/>
 
 					<WordsTable
 						parentState={this.state}
 						showWordsInfoTable={this.showWordsInfoTable}
+						deleteOneWord={this.deleteOneWord}
 					/>
 					<WordsInfoTable parentState={this.state} />
 				</Grid>

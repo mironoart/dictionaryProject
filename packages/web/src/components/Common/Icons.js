@@ -28,11 +28,12 @@ export default class Icons extends Component {
 						<ListItemText primary={'Main'} />
 					</ListItem>
 				</Link>
-				<ListItem button>
-					<School nativeColor={state.color} />
-					<ListItemText primary={'Train'} />
-				</ListItem>
-
+				<Link to="/train" style={state.linkStyle}>
+					<ListItem button>
+						<School nativeColor={state.color} />
+						<ListItemText primary={'Train'} />
+					</ListItem>
+				</Link>
 				<Link to="/dictionary" style={state.linkStyle}>
 					<ListItem button>
 						<Stars nativeColor={state.color} />

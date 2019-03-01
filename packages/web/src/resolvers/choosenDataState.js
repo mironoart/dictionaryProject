@@ -125,7 +125,10 @@ class UserData {
 		return (
 			<Subscribe to={[wordData]}>
 				{counter => {
-					if (translatableWord) counter.updateFromWord(translatableWord)
+					console
+					if (translatableWord) {
+						counter.updateFromWord(translatableWord.toLowerCase())
+					}
 
 					return null
 				}}
@@ -138,7 +141,7 @@ class UserData {
 			<Subscribe to={[wordData]}>
 				{counter => {
 					if (translation !== '') {
-						counter.updateTranslatedWord(translation)
+						counter.updateTranslatedWord(translation.toLowerCase())
 					}
 					return null
 				}}

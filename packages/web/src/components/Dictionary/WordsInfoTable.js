@@ -47,11 +47,28 @@ function ReactVirtualizedTable(props) {
 					return (
 						<Paper style={{ height: 400, width: '30%' }}>
 							{sortedData.map((item, index) => {
+								let display
+								if (item.image === '') display = 'none'
+
 								return (
 									<div key={index}>
 										<h3>{item.translations} </h3>
 										{item.sentences} <br />
-										<img src={item.image} style={{ width: '25px', height: '25px' }} />
+										<div
+											style={{
+												display: 'flex',
+												height: '100%'
+											}}
+										>
+											<img
+												src={item.image}
+												style={{
+													width: '100%',
+													height: '100%',
+													maxWidth: '200px'
+												}}
+											/>
+										</div>
 									</div>
 								)
 							})}

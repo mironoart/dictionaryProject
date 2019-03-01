@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
-
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
@@ -9,9 +7,9 @@ import TableSortLabel from '@material-ui/core/TableSortLabel'
 import Paper from '@material-ui/core/Paper'
 import { AutoSizer, Column, SortDirection, Table } from 'react-virtualized'
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { graphql, Query } from 'react-apollo'
+import Delete from '@material-ui/icons/Delete'
 import Loading from '../Common/Loading'
-
 const styles = theme => ({
 	table: {
 		fontFamily: theme.typography.fontFamily
@@ -186,60 +184,94 @@ const GET_COLLECTION_DATA = gql`
 	}
 `
 
-function ReactVirtualizedTable(props) {
-	const toggleWordsInfoTable = e => {
-		props.showWordsInfoTable(e.rowData.name)
+const DELETE_WORD = gql`
+	mutation deleteWord($collectionName: String!, $word: String!) {
+		deleteWord(collectionName: $collectionName, word: $word)
 	}
+`
 
-	if (props.parentState.isWordsTableHidden === true) {
-		return <Paper style={{ height: 400, width: '30%' }} />
-	} else {
-		return (
-			<Query
-				query={GET_COLLECTION_DATA}
-				variables={{ collectionName: props.parentState.collectionName }}
-			>
-				{({ error, loading, data }) => {
-					if (error) return null
-					if (loading)
+class ReactVirtualizedTable extends React.Component {
+	render() {
+		let rows = []
+		let isDeleted = false
+		const toggleWordsInfoTable = e => {
+			if (!isDeleted) this.props.showWordsInfoTable(e.rowData.name)
+		}
+
+		const deleteWord = word => {
+			isDeleted = true
+			this.props.mutate({
+				variables: {
+					collectionName: this.props.parentState.collectionName,
+					word: word
+				}
+			})
+		}
+
+		if (this.props.parentState.isWordsTableHidden === true) {
+			return <Paper style={{ height: 400, width: '30%' }} />
+		} else {
+			return (
+				<Query
+					query={GET_COLLECTION_DATA}
+					variables={{ collectionName: this.props.parentState.collectionName }}
+				>
+					{({ error, loading, data }) => {
+						if (error) return null
+						if (loading)
+							return (
+								<Paper
+									style={{
+										display: 'flex',
+										justifyContent: 'center',
+										alignItems: 'center',
+										height: 400,
+										width: '30%'
+									}}
+								>
+									<Loading />
+								</Paper>
+							)
+
+						rows = data.getCollectionsData.map((item, index) => {
+							return {
+								id: index,
+								name: item.word,
+								delete: (
+									<Delete
+										style={{ color: 'red', position: 'absolute', zIndex: '99999' }}
+										onClick={() => deleteWord(item.word)}
+									/>
+								)
+							}
+						})
+
 						return (
-							<Paper
-								style={{
-									display: 'flex',
-									justifyContent: 'center',
-									alignItems: 'center',
-									height: 400,
-									width: '30%'
-								}}
-							>
-								<Loading />
+							<Paper style={{ height: 400, width: '30%' }}>
+								<WrappedVirtualizedTable
+									rowCount={rows.length}
+									rowGetter={({ index }) => rows[index]}
+									onRowClick={e => toggleWordsInfoTable(e)}
+									columns={[
+										{
+											width: 200,
+											flexGrow: 1.0,
+											label: 'Words',
+											dataKey: 'name'
+										},
+										{
+											width: 100,
+											dataKey: 'delete',
+											numeric: true
+										}
+									]}
+								/>
 							</Paper>
 						)
-					let rows = []
-					rows = data.getCollectionsData.map((item, index) => {
-						return { id: index, name: item.word }
-					})
-
-					return (
-						<Paper style={{ height: 400, width: '30%' }}>
-							<WrappedVirtualizedTable
-								rowCount={rows.length}
-								rowGetter={({ index }) => rows[index]}
-								onRowClick={e => toggleWordsInfoTable(e)}
-								columns={[
-									{
-										width: 200,
-										flexGrow: 1.0,
-										label: 'Words',
-										dataKey: 'name'
-									}
-								]}
-							/>
-						</Paper>
-					)
-				}}
-			</Query>
-		)
+					}}
+				</Query>
+			)
+		}
 	}
 }
-export default ReactVirtualizedTable
+export default graphql(DELETE_WORD)(ReactVirtualizedTable)

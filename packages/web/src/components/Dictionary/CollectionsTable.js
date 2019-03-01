@@ -192,6 +192,7 @@ function ReactVirtualizedTable(props) {
 		console.log(e.rowData.name)
 		props.showWordsTable(e.rowData.name)
 	}
+
 	if (props.data.loading === true)
 		return (
 			<Paper
@@ -206,11 +207,12 @@ function ReactVirtualizedTable(props) {
 				<Loading />
 			</Paper>
 		)
+
 	if (props.data.loading === false) {
-		console.log('log')
 		rows = props.data.getCollections.map((item, index) => {
 			return { id: index, name: item.name }
 		})
+
 		return (
 			<Paper style={{ height: 400, width: '30%' }}>
 				<WrappedVirtualizedTable
