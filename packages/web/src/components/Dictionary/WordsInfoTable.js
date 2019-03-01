@@ -43,12 +43,15 @@ function ReactVirtualizedTable(props) {
 						)
 					let sortedData = data.getCollectionsData.filter(item => {
 						if (item.word === props.parentState.choosenWord) return true
+						return false
 					})
 					return (
 						<Paper style={{ height: 400, width: '30%' }}>
 							{sortedData.map((item, index) => {
-								let display
-								if (item.image === '') display = 'none'
+								/* let display
+								if (item.image === '') {
+									display = 'none'
+								} */
 
 								return (
 									<div key={index}>
@@ -67,6 +70,7 @@ function ReactVirtualizedTable(props) {
 													height: '100%',
 													maxWidth: '200px'
 												}}
+												alt=""
 											/>
 										</div>
 									</div>

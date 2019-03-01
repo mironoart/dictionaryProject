@@ -15,6 +15,6 @@ export default class HiddenImage extends Component {
 					Show Hidden Image
 				</Button>
 			)
-		} else return <img src={props.image} alt="image" style={{ width: '100%' }} />
+		} else return <img src={props.image} alt="" style={{ width: '100%' }} />
 	}
 }

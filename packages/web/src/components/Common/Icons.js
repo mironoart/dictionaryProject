@@ -28,12 +28,14 @@ export default class Icons extends Component {
 						<ListItemText primary={'Main'} />
 					</ListItem>
 				</Link>
+
 				<Link to="/train" style={state.linkStyle}>
 					<ListItem button>
 						<School nativeColor={state.color} />
 						<ListItemText primary={'Train'} />
 					</ListItem>
 				</Link>
+
 				<Link to="/dictionary" style={state.linkStyle}>
 					<ListItem button>
 						<Stars nativeColor={state.color} />
@@ -41,25 +43,33 @@ export default class Icons extends Component {
 					</ListItem>
 				</Link>
 
-				<ListItem button>
-					<History nativeColor={state.color} />
-					<ListItemText primary={'History'} />
-				</ListItem>
+				<Link to="/history" style={state.linkStyle}>
+					<ListItem button>
+						<History nativeColor={state.color} />
+						<ListItemText primary={'History'} />
+					</ListItem>
+				</Link>
 
-				<ListItem button>
-					<Settings nativeColor={state.color} />
-					<ListItemText primary={'Settings'} />
-				</ListItem>
+				<Link to="/settings" style={state.linkStyle}>
+					<ListItem button>
+						<Settings nativeColor={state.color} />
+						<ListItemText primary={'Settings'} />
+					</ListItem>
+				</Link>
 
-				<ListItem button>
-					<Info nativeColor={state.color} />
-					<ListItemText primary={'Info'} />
-				</ListItem>
+				<Link to="/info" style={state.linkStyle}>
+					<ListItem button>
+						<Info nativeColor={state.color} />
+						<ListItemText primary={'Info'} />
+					</ListItem>
+				</Link>
 
-				<ListItem button>
-					<Help nativeColor={state.color} />
-					<ListItemText primary={'Help'} />
-				</ListItem>
+				<Link to="/help" style={state.linkStyle}>
+					<ListItem button>
+						<Help nativeColor={state.color} />
+						<ListItemText primary={'Help'} />
+					</ListItem>
+				</Link>
 
 				<ListItem button onClick={this.logOut}>
 					<LogOut nativeColor={state.color} />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Grid, Paper, Button } from '@material-ui/core'
+import { Grid, Paper } from '@material-ui/core'
 import Drawer from '../Common/Drawer.js'
 
 import HiddenSentences from './HiddenSentences'
