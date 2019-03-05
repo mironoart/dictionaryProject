@@ -7,22 +7,32 @@ import HiddenSentences from './HiddenSentences'
 import HiddenWordAndSentences from './HiddenWordAndSentences'
 import HiddenImage from './HiddenImage.js'
 import HiddenMemoryButtons from './HiddenMemoryButtons.js'
-export default class index extends Component {
+
+import SellectCollection from './SellectCollection.js'
+
+class index extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			displayedWord: 'Hi',
-			displayedSentences: ['Firs sentence', 'Second sentence'],
 			isSentencesShow: false,
-			hiddenWord: 'Привет',
 			isWordShow: false,
-			hiddenSentences: ['First Hidden Sentence', 'Second Hidden Sentence'],
-			image:
-				'https://tse1.mm.bing.net/th?id=OIP.tiiEJVLfKz0hlirgCIiUowHaHG&pid=Api',
 			isImageShow: false,
-			isHiddenMemoryButtonsShow: false
+			isHiddenMemoryButtonsShow: false,
+			collection: 'Choose Collection',
+			wordIterator: 0,
+			wordsArr: [
+				{
+					id: '',
+					word: '',
+					translations: '',
+					sentences: '',
+					image: '',
+					time: ''
+				}
+			]
 		}
 	}
+
 	showHiddenSentences = () => {
 		this.setState({
 			isSentencesShow: true
@@ -40,8 +50,59 @@ export default class index extends Component {
 			isHiddenMemoryButtonsShow: true
 		})
 	}
+	chooseCollection = collection => {
+		this.setState({
+			collection: collection
+		})
+	}
+	getCollectionData = data => {
+		let wordsArr = []
+
+		data.getCollectionsData.forEach(item => {
+			const pastTime = Date.parse(item.time)
+			const now = new Date().getTime()
+			if (pastTime < now) {
+				wordsArr.push(item)
+			}
+		})
+		if (wordsArr.length !== 0) {
+			this.setState({
+				wordsArr: wordsArr
+			})
+		}
+	}
+
+	againButtonHandler = () => {
+		this.setState({
+			wordIterator: Math.floor(Math.random() * this.state.wordsArr.length),
+			isSentencesShow: false,
+			isWordShow: false,
+			isImageShow: false,
+			isHiddenMemoryButtonsShow: false
+		})
+	}
+	memoryButtonHandler = () => {
+		const newWordsArr = this.state.wordsArr
+		newWordsArr.splice([this.state.wordsIterator], 1)
+		if (newWordsArr.length === 0) {
+			this.setState({
+				wordsArr: [{ id: '' }]
+			})
+		} else {
+			this.setState({
+				wordsArr: newWordsArr,
+				isSentencesShow: false,
+				isWordShow: false,
+				isImageShow: false,
+				isHiddenMemoryButtonsShow: false
+			})
+		}
+	}
 
 	render() {
+		const wordIterator = this.state.wordIterator
+		const wordsArr = this.state.wordsArr
+		console.log(this.state.wordIterator, this.state.wordsArr)
 		const styles = {
 			paper: {
 				display: 'flex',
@@ -56,6 +117,7 @@ export default class index extends Component {
 			hiddenSentencesContainer: {
 				height: '15%',
 				display: 'flex',
+				textAlign: 'center',
 				justifyContent: 'center',
 				alignItems: 'end'
 			},
@@ -65,11 +127,12 @@ export default class index extends Component {
 				display: 'flex',
 				flexDirection: 'column',
 				justifyContent: 'center',
-				alignItems: 'end',
+				alignItems: 'center',
 				textAlign: 'center'
 			},
 			hiddenImage: {
-				height: '60%',
+				height: '50%',
+				padding: '40px',
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center'
@@ -78,43 +141,72 @@ export default class index extends Component {
 				width: '75px'
 			}
 		}
-		return (
-			<div>
-				<Drawer />
+		if (this.state.wordsArr[0].id === '')
+			return (
+				<div>
+					<Drawer />
+					<Grid container direction="column" justify="center" alignItems="center">
+						<Paper style={styles.paper}>
+							<SellectCollection
+								chooseCollection={this.chooseCollection}
+								collectionName={this.state.collection}
+								getCollectionData={this.getCollectionData}
+							/>
+						</Paper>
+					</Grid>
+				</div>
+			)
+		else
+			return (
+				<div>
+					<Drawer />
 
-				<Grid container direction="column" justify="center" alignItems="center">
-					<Paper style={styles.paper}>
-						<h3 style={styles.mainWord}> {this.state.displayedWord}</h3>
+					<Grid container direction="column" justify="center" alignItems="center">
+						<Paper style={styles.paper}>
+							<SellectCollection
+								chooseCollection={this.chooseCollection}
+								collectionName={this.state.collection}
+								getCollectionData={this.getCollectionData}
+							/>
+							<i style={{ textAlign: 'center' }}> {wordsArr.length} words left</i>
+							<h3 style={styles.mainWord}> {wordsArr[wordIterator].word}</h3>
 
-						<div style={styles.hiddenSentencesContainer}>
-							<HiddenSentences
-								sentences={this.state.displayedSentences}
-								isSentencesShow={this.state.isSentencesShow}
-								showHiddenSentences={this.showHiddenSentences}
+							<div style={styles.hiddenSentencesContainer}>
+								<HiddenSentences
+									sentences={wordsArr[wordIterator].sentences}
+									isSentencesShow={this.state.isSentencesShow}
+									showHiddenSentences={this.showHiddenSentences}
+								/>
+							</div>
+							<div style={styles.hiddenWordAndSentences}>
+								<HiddenWordAndSentences
+									hiddenWord={wordsArr[wordIterator].translations}
+									isWordShow={this.state.isWordShow}
+									hiddenSentences={wordsArr[wordIterator].sentences}
+								/>
+							</div>
+							<div style={styles.hiddenImage}>
+								<HiddenImage
+									image={wordsArr[wordIterator].image}
+									isImageShow={this.state.isImageShow}
+									showHiddenImage={this.showHiddenImage}
+								/>
+							</div>
+							<HiddenMemoryButtons
+								variables={{
+									id: this.state.wordsArr[wordIterator].id,
+									collectionName: this.state.collection
+								}}
+								isHiddenMemoryButtonsShow={this.state.isHiddenMemoryButtonsShow}
+								showHiddenMemoryButtons={this.showHiddenMemoryButtons}
+								againButtonHandler={this.againButtonHandler}
+								memoryButtonHandler={this.memoryButtonHandler}
 							/>
-						</div>
-						<div style={styles.hiddenWordAndSentences}>
-							<HiddenWordAndSentences
-								hiddenWord={this.state.hiddenWord}
-								isWordShow={this.state.isWordShow}
-								hiddenSentences={this.state.hiddenSentences}
-							/>
-						</div>
-						<div style={styles.hiddenImage}>
-							<HiddenImage
-								image={this.state.image}
-								isImageShow={this.state.isImageShow}
-								showHiddenImage={this.showHiddenImage}
-							/>
-						</div>
-						<HiddenMemoryButtons
-							styles={styles}
-							isHiddenMemoryButtonsShow={this.state.isHiddenMemoryButtonsShow}
-							showHiddenMemoryButtons={this.showHiddenMemoryButtons}
-						/>
-					</Paper>
-				</Grid>
-			</div>
-		)
+						</Paper>
+					</Grid>
+				</div>
+			)
 	}
 }
+
+export default index

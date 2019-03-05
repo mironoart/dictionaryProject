@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Button } from '@material-ui/core'
 
 export default class HiddenImage extends Component {
 	render() {
@@ -7,14 +6,16 @@ export default class HiddenImage extends Component {
 
 		if (props.isImageShow === false) {
 			return (
-				<Button
-					variant="contained"
-					color="primary"
+				<i
+					style={{ textDecoration: 'underline', cursor: 'pointer' }}
 					onClick={() => props.showHiddenImage()}
 				>
-					Show Hidden Image
-				</Button>
+					Click to show image
+				</i>
 			)
-		} else return <img src={props.image} alt="" style={{ width: '100%' }} />
+		} else
+			return (
+				<img src={props.image} alt="" style={{ width: '100%', height: '100%' }} />
+			)
 	}
 }

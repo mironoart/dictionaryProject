@@ -7,9 +7,9 @@ export default class HiddenWordAndSentences extends React.Component {
 			return <div />
 		} else {
 			return (
-				<div>
+				<div style={{ display: 'flex', flexDirection: 'column' }}>
 					<div>
-						<strong>{props.hiddenWord}</strong>
+						<h3>{props.hiddenWord}</h3>
 					</div>
 					{props.hiddenSentences.map((item, index) => {
 						return <i key={index}> {item} </i>

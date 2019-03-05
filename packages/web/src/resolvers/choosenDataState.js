@@ -207,7 +207,7 @@ class UserData {
 						language: counter.state.language,
 						word: counter.state.fromWord,
 						translatedWord: counter.state.translatedWords[0],
-						sentence: 'Here Sentence',
+						sentence: ['Here Sentence 1', 'Here Sentence 2', 'Here Sentence 3'],
 						partOfSpeech: counter.state.partOfSpeech,
 						image: counter.state.imgUrl
 					}

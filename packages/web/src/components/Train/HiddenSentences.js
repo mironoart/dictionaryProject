@@ -1,12 +1,11 @@
 import React from 'react'
-import { Button } from '@material-ui/core'
 
 export default class DisplayedSentences extends React.Component {
 	render() {
 		const props = this.props
 		if (props.isSentencesShow === true) {
 			return (
-				<div>
+				<div style={{ display: 'flex', flexDirection: 'column' }}>
 					{props.sentences.map((item, index) => {
 						return <i key={index}> {item} </i>
 					})}
@@ -14,13 +13,12 @@ export default class DisplayedSentences extends React.Component {
 			)
 		} else {
 			return (
-				<Button
-					variant="contained"
-					color="primary"
+				<i
+					style={{ textDecoration: 'underline', cursor: 'pointer' }}
 					onClick={() => props.showHiddenSentences()}
 				>
-					Show DisplayedSentences
-				</Button>
+					Click to show sentences
+				</i>
 			)
 		}
 	}

@@ -19,7 +19,7 @@ const ADD_TO_USER_COLLECTION = gql`
 		$collectionName: String!
 		$word: String!
 		$translations: String!
-		$sentence: String!
+		$sentence: [String!]
 		$image: String!
 		$time: String!
 	) {
@@ -64,7 +64,7 @@ function AddToCollectionWindow(props) {
 				translations: translatedWord,
 				sentence: sentence,
 				image: image || '',
-				time: new Date().getTime().toString()
+				time: new Date().toUTCString()
 			}
 		})
 		alert('Successfuly added!')

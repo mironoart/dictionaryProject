@@ -33,7 +33,7 @@ type CollectionData {
   id: ID
   word: String
   translations: String
-  sentences: String
+  sentences: [String]
   image: String
   time: String
 }
