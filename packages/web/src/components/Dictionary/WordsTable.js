@@ -180,6 +180,14 @@ const GET_COLLECTION_DATA = gql`
 	query getCollectionsData($collectionName: String!) {
 		getCollectionsData(collectionName: $collectionName) {
 			word
+			translations
+			sentences {
+				from
+				to
+				word
+			}
+			image
+			time
 		}
 	}
 `
@@ -194,8 +202,8 @@ class ReactVirtualizedTable extends React.Component {
 	render() {
 		let rows = []
 		let isDeleted = false
-		const toggleWordsInfoTable = e => {
-			if (!isDeleted) this.props.showWordsInfoTable(e.rowData.name)
+		const toggleWordsInfoTable = (e, data) => {
+			if (!isDeleted) this.props.showWordsInfoTable(e.rowData.name, data)
 		}
 
 		const deleteWord = word => {
@@ -251,7 +259,7 @@ class ReactVirtualizedTable extends React.Component {
 								<WrappedVirtualizedTable
 									rowCount={rows.length}
 									rowGetter={({ index }) => rows[index]}
-									onRowClick={e => toggleWordsInfoTable(e)}
+									onRowClick={e => toggleWordsInfoTable(e, data)}
 									columns={[
 										{
 											width: 200,

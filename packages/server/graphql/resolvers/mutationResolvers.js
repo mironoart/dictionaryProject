@@ -89,12 +89,14 @@ export default {
 		{ collectionName, word, translations, sentence, image, time },
 		ctx
 	) => {
+		sentence = JSON.parse(JSON.stringify(sentence))
 		let userId
 		try {
 			userId = authCheck(ctx)
 		} catch (error) {
 			throw error
 		}
+
 		let id = uuid()
 		await dbUser(userId)
 			.collection(collectionName)

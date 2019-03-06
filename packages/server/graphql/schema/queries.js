@@ -29,11 +29,17 @@ type Collections {
   name: String
 }
 
+type Sentences {
+  from: String
+  to: String
+  word: String
+}
+
 type CollectionData {
   id: ID
   word: String
-  translations: String
-  sentences: [String]
+  translations: [String]
+  sentences: [Sentences]
   image: String
   time: String
 }

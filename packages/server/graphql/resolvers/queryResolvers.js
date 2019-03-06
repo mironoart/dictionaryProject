@@ -90,12 +90,11 @@ export default {
 			.get()
 			.then(snapshot => {
 				snapshot.forEach(doc => {
-					console.log('------', doc.data().sentences)
 					collectionData.push({
 						id: doc.data().id,
 						word: doc.data().word,
-						translations: doc.data().translations,
-						sentences: doc.data().sentences,
+						translations: doc.data().translations.map(item => item),
+						sentences: doc.data().sentences.map(item => item),
 						image: doc.data().image,
 						time: doc.data().time
 					})

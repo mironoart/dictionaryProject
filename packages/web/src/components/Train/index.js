@@ -47,7 +47,8 @@ class index extends Component {
 		this.setState({
 			isWordShow: true,
 			isImageShow: true,
-			isHiddenMemoryButtonsShow: true
+			isHiddenMemoryButtonsShow: true,
+			isSentencesShow: true
 		})
 	}
 	chooseCollection = collection => {
@@ -108,7 +109,7 @@ class index extends Component {
 				display: 'flex',
 				flexDirection: 'column',
 				width: '300px',
-				height: '600px'
+				height: '700px'
 			},
 			mainWord: {
 				height: '5%',
@@ -119,11 +120,12 @@ class index extends Component {
 				display: 'flex',
 				textAlign: 'center',
 				justifyContent: 'center',
-				alignItems: 'end'
+				alignItems: 'end',
+				overflowY: 'auto'
 			},
 
 			hiddenWordAndSentences: {
-				height: '15%',
+				height: '25%',
 				display: 'flex',
 				flexDirection: 'column',
 				justifyContent: 'center',
@@ -131,7 +133,7 @@ class index extends Component {
 				textAlign: 'center'
 			},
 			hiddenImage: {
-				height: '50%',
+				height: '30%',
 				padding: '40px',
 				display: 'flex',
 				justifyContent: 'center',
@@ -180,7 +182,7 @@ class index extends Component {
 							</div>
 							<div style={styles.hiddenWordAndSentences}>
 								<HiddenWordAndSentences
-									hiddenWord={wordsArr[wordIterator].translations}
+									hiddenWordsArr={wordsArr[wordIterator].translations}
 									isWordShow={this.state.isWordShow}
 									hiddenSentences={wordsArr[wordIterator].sentences}
 								/>

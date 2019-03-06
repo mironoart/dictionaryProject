@@ -75,7 +75,6 @@ class Word extends Component {
 						}}
 					/>
 					<ChevronRightIcon
-						onClick={this.handleExpandClick}
 						nativeColor={'blue'}
 						style={{
 							display: this.state.displayUp,

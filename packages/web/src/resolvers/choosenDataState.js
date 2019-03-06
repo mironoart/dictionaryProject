@@ -49,6 +49,7 @@ export class wordData extends Container {
 			partOfSpeech: this.state.partOfSpeech,
 			language: this.state.language
 		}
+		console.log(this.state.translatedWords)
 	}
 	updateExamples(examples) {
 		let arr = this.state.examples
@@ -74,6 +75,7 @@ export class wordData extends Container {
 			partOfSpeech: this.state.partOfSpeech,
 			language: this.state.language
 		}
+		console.log(this.state.examples)
 	}
 	updateImgUrl(url) {
 		this.state = {
@@ -206,8 +208,8 @@ class UserData {
 					const userVariables = {
 						language: counter.state.language,
 						word: counter.state.fromWord,
-						translatedWord: counter.state.translatedWords[0],
-						sentence: ['Here Sentence 1', 'Here Sentence 2', 'Here Sentence 3'],
+						translatedWord: counter.state.translatedWords,
+						sentence: counter.state.examples,
 						partOfSpeech: counter.state.partOfSpeech,
 						image: counter.state.imgUrl
 					}
@@ -228,7 +230,8 @@ class UserData {
 						}
 					`
 
-					console.log(variables)
+					console.log('VARIABLES ----', variables)
+					console.log('USERVARIABLES----', userVariables)
 					if (counter.state.fromWord === []) return 'Choose translation!'
 					//if (counter.state.translation === undefined)
 					//	return 'Translation is undefined!'

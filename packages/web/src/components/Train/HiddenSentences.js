@@ -7,7 +7,7 @@ export default class DisplayedSentences extends React.Component {
 			return (
 				<div style={{ display: 'flex', flexDirection: 'column' }}>
 					{props.sentences.map((item, index) => {
-						return <i key={index}> {item} </i>
+						return <i key={index}> {item.from} </i>
 					})}
 				</div>
 			)

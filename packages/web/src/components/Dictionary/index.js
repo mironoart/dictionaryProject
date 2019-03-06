@@ -23,10 +23,11 @@ export default class index extends Component {
 		})
 	}
 
-	showWordsInfoTable = choosenWord => {
+	showWordsInfoTable = (choosenWord, data) => {
 		this.setState({
 			isWordsInfoTableHidden: false,
-			choosenWord: choosenWord
+			choosenWord: choosenWord,
+			wordInfo: data.getCollectionsData
 		})
 	}
 

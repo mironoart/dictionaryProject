@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+
 import Loading from '../Common/Loading'
-/* import ExamplesSelect from './ExamplesSelect'
- */
+import ExamplesSelect from './ExamplesSelect'
+
 export default class Examples extends Component {
 	render() {
 		const GET_EXAMPLES = gql`
@@ -53,15 +55,18 @@ export default class Examples extends Component {
 						let items = data.getExamples.map((items, i) => {
 							return (
 								<div key={i} style={{ display: 'flex', alignItems: 'center' }}>
-									{/* <ExamplesSelect
-										examples={{
-											word: this.props.word,
-											from: items.fromSentence,
-											to: items.toSentence
-										}}
-									/> */}
+									{
+										<ExamplesSelect
+											examples={{
+												word: this.props.word,
+												from: items.fromSentence,
+												to: items.toSentence
+											}}
+										/>
+									}
 									<p>
-										{items.fromSentence} <br />
+										{items.fromSentence}
+										<br />
 										{items.toSentence}
 									</p>
 								</div>

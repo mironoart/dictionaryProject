@@ -42,13 +42,14 @@ class RecipeReviewCard extends React.Component {
 		const translatableWord = this.props.variables.word
 		const { classes } = this.props
 		const data = this.props.data
-		const translations = data.map((item, i) => {
+		let translations = data.map((item, i) => {
 			return {
 				word: item.translatedWord,
 				partOfSpeech: item.partOfSpeech,
 				confidence: item.confidence
 			}
 		})
+		if (translations.length === 0 ) translations = ['']
 
 		return (
 			<Card className={classes.card}>

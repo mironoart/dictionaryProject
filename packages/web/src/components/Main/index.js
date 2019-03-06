@@ -66,7 +66,7 @@ class CenteredGrid extends Component {
 							alignItems="center"
 						>
 							<Form lang={this.changeFromLang} />
-							<h3> To </h3>
+							<h3> &#10148; </h3>
 							<Form lang={this.changeToLang} />
 						</Grid>
 						<TextField
