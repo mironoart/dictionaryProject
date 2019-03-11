@@ -8,6 +8,16 @@ import { Provider } from 'unstated'
 import Cookies from 'universal-cookie'
 
 const cookies = new Cookies()
+let p = window.location.search
+
+if (p !== '') {
+	let token = p.slice(10, p.length - 3)
+
+	console.log('sett cookies')
+	console.log(token)
+	cookies.set('token', token)
+}
+
 if (localStorage.getItem('user') === null) {
 	console.log('enter')
 	localStorage.setItem(
@@ -17,24 +27,21 @@ if (localStorage.getItem('user') === null) {
 				lengDirection: 'straight',
 				quantityOfWords: 30,
 				email: '',
-				image:
-					'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQRAkdqTCru5stUR5DC_hS4q0-UcW3xpzZ-Xg5rSuVsk4fPWHbX2Q',
+				image: '',
 				username: ''
 			}
 		])
 	)
 }
 
+console.log(cookies.get('token'))
 if (cookies.get('token') !== undefined) {
 	localStorage.setItem('token', JSON.stringify(cookies.get('token')))
 }
-/* if (localStorage.getItem('token') === null) {
-	localStorage.clear()
-} */
+
 const authLink = setContext((_, { headers }) => {
-	// get the authentication token from local storage if it exists
+	console.log('context')
 	const token = JSON.parse(localStorage.getItem('token'))
-	// return the headers to the context so httpLink can read them
 	return {
 		headers: {
 			...headers,

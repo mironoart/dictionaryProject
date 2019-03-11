@@ -52,57 +52,83 @@ class CenteredGrid extends Component {
 			enableButton = false
 		}
 
-		return (
-			<React.Fragment>
-				<Grid container direction="column" justify="center" alignItems="center">
-					<Drawer />
+		let isAuth = JSON.parse(localStorage.getItem('user'))
 
-					<div className="container">
-						<Grid
-							container
-							direction="row"
-							justify="center"
-							spacing={24}
-							alignItems="center"
-						>
-							<Form lang={this.changeFromLang} />
-							<h3> &#10148; </h3>
-							<Form lang={this.changeToLang} />
-						</Grid>
-						<TextField
-							id="outlined-textarea"
-							label="Multiline Placeholder"
-							placeholder="Placeholder"
-							multiline
-							margin="normal"
-							variant="outlined"
-							style={{ width: '400px' }}
-							onChange={event => {
-								this.changeWord(event)
-							}}
-						/>
-						<div
-							style={{
-								marginBottom: '10px',
-								display: 'flex',
-								justifyContent: 'center'
-							}}
-						>
-							<Button
-								variant="contained"
-								color="primary"
-								onClick={readyToggle}
-								disabled={enableButton}
-								style={{ width: '50%' }}
+		if (isAuth[0].email === '')
+			return (
+				<div
+					style={{
+						position: 'fixed',
+						top: 0,
+						bottom: 0,
+						left: '-200px',
+						right: 0,
+						width: '200px',
+						height: '100px',
+						margin: 'auto'
+					}}
+				>
+					<strong>Login with google: </strong>
+					<br />
+
+					<i>Still testing... </i>
+					<a href="http://localhost:4000/auth/google">
+						<img src="https://unitedwaterrestoration.com/wp-content/uploads/2012/11/Red-signin_Google_base_44dp.png" />
+					</a>
+				</div>
+			)
+		else
+			return (
+				<React.Fragment>
+					<Grid container direction="column" justify="center" alignItems="center">
+						<Drawer />
+
+						<div className="container">
+							<Grid
+								container
+								direction="row"
+								justify="center"
+								spacing={24}
+								alignItems="center"
 							>
-								Translate
-							</Button>
+								<Form lang={this.changeFromLang} />
+								<h3> &#10148; </h3>
+								<Form lang={this.changeToLang} />
+							</Grid>
+							<TextField
+								id="outlined-textarea"
+								label="Multiline Placeholder"
+								placeholder="Placeholder"
+								multiline
+								margin="normal"
+								variant="outlined"
+								style={{ width: '400px' }}
+								onChange={event => {
+									this.changeWord(event)
+								}}
+							/>
+							<div
+								style={{
+									marginBottom: '10px',
+									display: 'flex',
+									justifyContent: 'center'
+								}}
+							>
+								<Button
+									variant="contained"
+									color="primary"
+									onClick={readyToggle}
+									disabled={enableButton}
+									style={{ width: '50%' }}
+								>
+									Translate
+								</Button>
+							</div>
+							<Translate data={this.state} isReady={this.isReady} />
 						</div>
-						<Translate data={this.state} isReady={this.isReady} />
-					</div>
-				</Grid>
-			</React.Fragment>
-		)
+					</Grid>
+				</React.Fragment>
+			)
 	}
 }
 

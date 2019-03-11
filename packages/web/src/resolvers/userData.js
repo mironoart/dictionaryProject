@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import React from 'react'
+import Loading from '../components/Common/Loading'
 
 const setUserData = () => {
 	const GET_USER_DATA = gql`
@@ -20,10 +21,10 @@ const setUserData = () => {
 	}
 	return (
 		<Query query={GET_USER_DATA}>
-			{({ error, data }) => {
-				if (error) return null
-
-				return <p>{setLocalStorage(data.getUserData)}</p>
+			{({ error, data, loading }) => {
+				if (error) return 'Some error ocurred. Please try again'
+				if (loading) return <Loading />
+				else return <p>{setLocalStorage(data.getUserData)}</p>
 			}}
 		</Query>
 	)

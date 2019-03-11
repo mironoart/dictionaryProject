@@ -146,13 +146,13 @@ class MiniDrawer extends React.Component {
 							justifyContent: 'space-between'
 						}}
 					>
-						<a href="http://localhost:4000/auth/google">
+						
 							<Avatar
 								alt={userData.username}
 								src={userData.image}
 								className={classes.bigAvatar}
 							/>
-						</a>
+					
 						<h3 style={{ margin: 'auto' }}> {userData.username}</h3>
 						<div className={classes.toolbar}>
 							<IconButton onClick={this.handleDrawerClose}>
