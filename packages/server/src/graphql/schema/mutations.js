@@ -3,7 +3,9 @@ input Test {
   word: String
   from: String
   to: String
-  
+}
+type isCreated {
+  created: Boolean
 }
 type Mutation {
   addWord(language: String! word:String! translatedWord: String! partOfSpeech: String! ) : String
@@ -11,5 +13,6 @@ type Mutation {
   addNewCollection(collectionName: String!): String
   deleteWord(collectionName: String! word: String!): String
   updateCollectionWordInfo( collection: String! id: String! time: String! ): String
+  signUp(username: String! email: String! password: String!): [isCreated]
 }
 `

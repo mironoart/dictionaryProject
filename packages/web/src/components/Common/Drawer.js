@@ -121,7 +121,7 @@ class MiniDrawer extends React.Component {
 							<MenuIcon />
 						</IconButton>
 						<Typography variant="h6" color="inherit" noWrap>
-							Name here
+							Translator - Dictionary - Revision
 						</Typography>
 					</Toolbar>
 				</AppBar>
@@ -146,13 +146,12 @@ class MiniDrawer extends React.Component {
 							justifyContent: 'space-between'
 						}}
 					>
-						
-							<Avatar
-								alt={userData.username}
-								src={userData.image}
-								className={classes.bigAvatar}
-							/>
-					
+						<Avatar
+							alt={userData.username}
+							src={userData.image}
+							className={classes.bigAvatar}
+						/>
+
 						<h3 style={{ margin: 'auto' }}> {userData.username}</h3>
 						<div className={classes.toolbar}>
 							<IconButton onClick={this.handleDrawerClose}>

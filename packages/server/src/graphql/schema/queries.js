@@ -49,6 +49,8 @@ type UserData {
   email: String
   image: String
   username: String
+  token: String
+  error: String
 }
 
 type Query {
@@ -59,5 +61,7 @@ type Query {
   getCollections: [Collections]
   getCollectionsData(collectionName: String!): [CollectionData]
   getUserData: [UserData]
+  logIn (email: String! password: String!): [UserData]
+
 }
 `

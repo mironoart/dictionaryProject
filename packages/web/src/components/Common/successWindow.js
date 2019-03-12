@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import userData from '../../resolvers/userData'
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom'
 
 
 export default class successWindow extends Component {

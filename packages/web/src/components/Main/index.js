@@ -4,6 +4,8 @@ import Drawer from '../Common/Drawer'
 import Form from './formControl'
 import Translate from './Translate'
 import Button from '@material-ui/core/Button'
+import LoginForm from '../Login/LoginForm'
+import SignUpForm from '../Login/SignUpForm'
 
 class CenteredGrid extends Component {
 	constructor(props) {
@@ -12,7 +14,8 @@ class CenteredGrid extends Component {
 		this.state = {
 			from: '',
 			to: '',
-			word: ''
+			word: '',
+			isSignUp: false
 		}
 	}
 	changeFromLang = from => {
@@ -36,6 +39,13 @@ class CenteredGrid extends Component {
 			word: event.target.value
 		})
 	}
+	signUpClick = () => {
+		let p
+		!this.state.isSignUp ? (p = true) : (p = false)
+		this.setState({
+			isSignUp: p
+		})
+	}
 
 	render() {
 		const readyToggle = trigger => {
@@ -54,29 +64,9 @@ class CenteredGrid extends Component {
 
 		let isAuth = JSON.parse(localStorage.getItem('user'))
 
-		if (isAuth[0].email === '')
-			return (
-				<div
-					style={{
-						position: 'fixed',
-						top: 0,
-						bottom: 0,
-						left: '-200px',
-						right: 0,
-						width: '200px',
-						height: '100px',
-						margin: 'auto'
-					}}
-				>
-					<strong>Login with google: </strong>
-					<br />
-
-					<i>Still testing... </i>
-					<a href="http://localhost:4000/auth/google">
-						<img src="https://unitedwaterrestoration.com/wp-content/uploads/2012/11/Red-signin_Google_base_44dp.png" />
-					</a>
-				</div>
-			)
+		if (isAuth[0].email === '' && !this.state.isSignUp)
+			return <LoginForm signUpClick={this.signUpClick} />
+		if (this.state.isSignUp) return <SignUpForm signUpClick={this.signUpClick} />
 		else
 			return (
 				<React.Fragment>
