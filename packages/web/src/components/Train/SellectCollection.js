@@ -20,15 +20,15 @@ const GET_COLLECTION_DATA = gql`
 	query getCollectionsData($collectionName: String!) {
 		getCollectionsData(collectionName: $collectionName) {
 			id
-    word
-    translations
-		sentences{
-      from
-      to
-      word
-    }
-    image
-    time
+			word
+			translations
+			sentences {
+				from
+				to
+				word
+			}
+			image
+			time
 		}
 	}
 `

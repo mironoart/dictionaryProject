@@ -10,6 +10,8 @@ import TextField from '@material-ui/core/TextField'
 import Loading from '../Common/Loading'
 import SnackBar from './SnackBar'
 
+import { collectData } from '../../resolvers/choosenDataState'
+
 const GET_COLLECTIONS = gql`
 	query getCollections {
 		getCollections {
@@ -132,7 +134,13 @@ class AddToCollectionWindow extends React.Component {
 					}}
 				</Query>
 			)
-		else return <SnackBar />
+		else
+			return (
+				<React.Fragment>
+					<SnackBar />
+					{collectData.clearData()}
+				</React.Fragment>
+			)
 	}
 }
 

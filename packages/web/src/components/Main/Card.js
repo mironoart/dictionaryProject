@@ -49,7 +49,7 @@ class RecipeReviewCard extends React.Component {
 				confidence: item.confidence
 			}
 		})
-		if (translations.length === 0 ) translations = ['']
+		if (translations.length === 0) translations = ['']
 
 		return (
 			<Card className={classes.card}>
@@ -57,6 +57,7 @@ class RecipeReviewCard extends React.Component {
 				<Words translations={translations} variables={this.props.variables} />
 				<ImageStepper translatableWord={translatableWord} />
 				<AddButton />
+				{collectData.clearData()}
 				{collectData.collectTranslatableWord(translatableWord)}
 				{collectData.collectFromLanguage(this.props.variables.from)}
 				{collectData.collectPartOfSpeech(translations[0].partOfSpeech)}

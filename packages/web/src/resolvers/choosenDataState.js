@@ -121,6 +121,17 @@ export class wordData extends Container {
 			language: this.state.language
 		}
 	}
+	clearData = () => {
+		this.state = {
+			fromWord: '',
+			translatedWords: [],
+			examples: [],
+			imgUrl: '',
+			partOfSpeech: '',
+			language: ''
+		}
+		console.log(this.state)
+	}
 }
 class UserData {
 	collectTranslatableWord = translatableWord => {
@@ -248,6 +259,16 @@ class UserData {
 							</Mutation>
 						)
 					}
+				}}
+			</Subscribe>
+		)
+	}
+	clearData = () => {
+		return (
+			<Subscribe to={[wordData]}>
+				{counter => {
+					counter.clearData()
+					return null
 				}}
 			</Subscribe>
 		)
